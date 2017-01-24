@@ -4,7 +4,7 @@ Bit manipulation is the act of algorithmically manipulating bits or other pieces
 
 Bit manipulation, in some cases, can obviate or reduce the need to loop over a data structure and can give many-fold speed ups, as bit manipulations are processed in parallel, but the code can become more difficult to write and maintain.
 
-1. ## Is power of two
+## 1. Is power of two
    	
 ~~~~
    x         == 0...010...0
