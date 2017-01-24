@@ -8,29 +8,46 @@ namespace QuickSort
     public class Algorithm<T>
         where T: IComparable<T>
     {
-        public IEnumerable<T> QuickSort(IEnumerable<T> input)
+        public void QuickSort(IList<T> input) 
+            => QuickSort(input, 0, input.Count - 1);
+
+
+        private void QuickSort(IList<T> input, int lo, int hi)
         {
-            if (input.Count() == 0)
-                yield break;
-
-            if (input.Count() == 1)
+            if (lo < hi)
             {
-                yield return input.First();
-                yield break;
+                var pivot = Partition(input, lo, hi);
+                QuickSort(input, lo, pivot - 1);
+                QuickSort(input, pivot + 1, hi);
             }
+        }
 
-            var pivot = input.Last();
-            var left = QuickSort(input.Where(i => i.CompareTo(pivot) < 0));
-            var right = QuickSort(input.Where(i => i.CompareTo(pivot) > 0));
+        private int Partition(IList<T> input, int lo, int hi)
+        {
+            var pivot = input[hi];
+            var i = lo; //place for swapping
+            for (var j = lo; j < hi; j++)
+            {
+                if (input[j].CompareTo(pivot) <=0)
+                {
+                    Swap(input, i, j);
+                    i++;
+                }
+            }
+            Swap(input, i, hi);
 
-            foreach (var i in left)
-                yield return i;
+            return i;
 
-            yield return pivot;
+        }
 
-            foreach (var i in right)
-                yield return i;
-
+        private void Swap(IList<T> input, int i, int j)
+        {
+            if (i != j)
+            {
+                var aux = input[i];
+                input[i] = input[j];
+                input[j] = aux;
+            }
         }
     }
 }

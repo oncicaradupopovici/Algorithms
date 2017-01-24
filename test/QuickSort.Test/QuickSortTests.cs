@@ -15,13 +15,14 @@ namespace QuickSort.Test
             //Arrange
             var sut = new QuickSort.Algorithm<int>();
 
-            //Act
-            var actual = sut.QuickSort(input);
+            //Act           
+            sut.QuickSort(input);
 
             //Assert
             var expected = input.ToList();
             expected.Sort();
-            Assert.Equal(expected, actual);
+
+            Assert.Equal(expected, input);
         }
     }
 }
